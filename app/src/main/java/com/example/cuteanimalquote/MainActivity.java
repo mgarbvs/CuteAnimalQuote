@@ -5,8 +5,15 @@ import android.content.Context;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
+    ImageView animalPicture;
+    TextView quote;
+    TextView instructions;
+    Button taphere;
 
     //the plan: cute animal and a meme quote maybe? And then have it read aloud?
     // Perhaps we could have some nice music playing in the background too. https://developers.deezer.com/login?redirect=/api
@@ -20,5 +27,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        taphere = findViewById(R.id.tapHerePleaseWork); // why doesnt this work?????????????????????????????/
+        instructions = findViewById(R.id.instruction);
+        animalPicture = findViewById(R.id.pictureAnimal);
+
     }
 }
