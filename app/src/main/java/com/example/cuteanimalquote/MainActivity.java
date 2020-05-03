@@ -1,6 +1,7 @@
 package com.example.cuteanimalquote;
 import android.content.Context;
-// import com.android.volley.*; need to add volley to out library
+//import com.android.volley.*; //need to add volley to out library
+import com.android.volley.*; // ????
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import org.json.*; // for later;
 //mgarbus2 ericxu2
 public class MainActivity extends AppCompatActivity {
     ImageView animalPicture;
