@@ -1,14 +1,13 @@
 package com.example.cuteanimalquote;
 import android.content.Context;
-//import com.android.volley.*; //need to add volley to out library
-import com.android.volley.*; // ????
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.android.volley.*; //lets just get everything
+import com.android.volley.toolbox.Volley;
+
 import org.json.*; // for later;
 //mgarbus2 ericxu2
 public class MainActivity extends AppCompatActivity {
@@ -29,14 +28,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        taphere = findViewById(R.id.tapHerePleaseWork); // why doesnt this work?????????????????????????????/ it works now???
-        // we need a quote box
+        taphere = findViewById(R.id.tapHerePleaseWork);
+        // we need a quote box and also a credits box
         instructions = findViewById(R.id.instruction);
         animalPicture = findViewById(R.id.pictureAnimal);
 
     }
 
     public void runApi() {
+        RequestQueue request = Volley.newRequestQueue(this);
+        String dogUrl = "https://api.thedogapi.com/v1/images/search";
+        String fortuneUrl = "https://fortunecookie.docs.apiary.io/#reference/cookie/list-all-fortunes?console=1";
         //http://fortunecookieapi.herokuapp.com/#fortunes-fortune-get for the fortune
         //Perhaps we can store an array of past fortunes and skip ones we have gotten before? Maybe too ambitions
         //for dogs: https://api.thedogapi.com/v1/images/search seems to already do the trick, we just need to visit it each time we want a new dog.
