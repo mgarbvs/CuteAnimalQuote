@@ -33,18 +33,18 @@ public class MainActivity extends AppCompatActivity {
     }
     void runApi() {
         RequestQueue queue = Volley.newRequestQueue(this);
-        //String dogUrl = "https://api.thedogapi.com/v1/images/search";
-        String url = "https://dog.ceo/api/breeds/image/random";
-        //String apiKey = "06bd0cd7-415f-45f3-848c-0919a7b195af";
+        String url = "https://api.thedogapi.com/v1/images/search";
+        //String url = "https://dog.ceo/api/breeds/image/random";
+        String apiKey = "06bd0cd7-415f-45f3-848c-0919a7b195af";
         try {
-            //new Header("x-api-key", apiKey);
+            new Header("x-api-key", apiKey);
             JsonObjectRequest dogRequestAPI = new JsonObjectRequest(Request.Method.GET, url, null,
-                    new Response.Listener<JSONObject>() {
+                    new Response.Listener<JSONArray>() {
                         @Override
-                        public void onResponse(JSONObject response) {
+                        public void onResponse(JSONArray response) {
                             Log.d("program", "working");
                             try {
-                                String newUrl = response.get("message").toString();
+                                JSONObject id = response.getJSONObject(response.length() - 2);
                                 Picasso.get().load(newUrl).resize(600,500).centerCrop().into(animalPicture);
                                 Log.d("program", "working");
                             } catch (JSONException e) {
