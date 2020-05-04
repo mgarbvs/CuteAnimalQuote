@@ -2,6 +2,7 @@ package com.example.cuteanimalquote;
 import android.content.Context;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,8 +18,6 @@ public class MainActivity extends AppCompatActivity {
     TextView instructions;
     Button taphere;
 
-    //the plan: cute animal and a meme quote maybe? And then have it read aloud?
-    // Perhaps we could have some nice music playing in the background too. https://developers.deezer.com/login?redirect=/api
     //quotes: https://fortunecookie.docs.apiary.io/#reference/cookie/list-all-fortunes?console=1
     //For background music: https://www.tutorialspoint.com/how-to-play-background-music-in-android-app
     //
@@ -37,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void runApi() {
-        RequestQueue request = Volley.newRequestQueue(this);
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
         String dogUrl = "https://api.thedogapi.com/v1/images/search";
         String apiKey = "06bd0cd7-415f-45f3-848c-0919a7b195af";
         try {
@@ -46,13 +45,32 @@ public class MainActivity extends AppCompatActivity {
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
+                            try {
+                                String doggie = response.get("id").toString();
+                                System.out.println(doggie);
+                                Log.d("program", "working");
+                                // get photo with some program
+
+
+                            } catch (JSONException e) {
+                                Log.e("program", "json exception");
+                                System.out.println("oops we got an exception");
+                            }
 
                         }
-                    }
-
-            );
-
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError volleyerror) {
+                    Log.d("program", "volley error occured");
+                    return;
+                }
+            });
+            requestQueue.add(dogRequestAPI);
+        } catch (Exception e) {
+            System.out.println("Header/API key error? IDK");
         }
+        // Here goes fortune code
+
         String fortuneUrl = "https://fortunecookie.docs.apiary.io/#reference/cookie/list-all-fortunes?console=1";
         //http://fortunecookieapi.herokuapp.com/#fortunes-fortune-get for the fortune
         //Perhaps we can store an array of past fortunes and skip ones we have gotten before? Maybe too ambitions
