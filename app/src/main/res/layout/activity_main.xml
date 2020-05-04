@@ -52,8 +52,8 @@
 
     <TextView
         android:id="@+id/FortuneText"
-        android:layout_width="211dp"
-        android:layout_height="43dp"
+        android:layout_width="263dp"
+        android:layout_height="81dp"
         android:layout_marginStart="100dp"
         android:layout_marginLeft="100dp"
         android:layout_marginTop="41dp"
@@ -65,5 +65,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pictureAnimal" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="414dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="75dp"
+        android:layout_marginBottom="2dp"
+        android:text="by Michael Garbus (mgarbus2) and Eric Xu (ericxu2). Special thanks to all CA's and everyone involved in CS125"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tapHerePleaseWork" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
