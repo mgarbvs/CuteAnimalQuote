@@ -75,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
             System.out.println("Header/API key error? IDK");
         }
         // Here goes fortune code
+        // http://yerkee.com/api
         String fortuneUrl = "http://fortunecookieapi.com/v1/cookie?fortuneId=&lottoId=&lessonId=&limit=";
         JsonObjectRequest fortuneRequest = new JsonObjectRequest(Request.Method.GET, fortuneUrl, null,
                 new Response.Listener<JSONObject>() {
