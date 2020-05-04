@@ -1,15 +1,15 @@
 package com.example.cuteanimalquote;
 import android.content.Context;
+import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import com.squareup.picasso.Picasso;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.android.volley.*; //lets just get everything
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
+import com.android.volley.toolbox.*;
 
 import org.json.*; // for later;
 //mgarbus2 ericxu2
@@ -17,64 +17,52 @@ public class MainActivity extends AppCompatActivity {
     ImageView animalPicture;
     TextView quote;
     TextView instructions;
-    Button taphere;
     private String messageToShow;
-
-
-    //quotes: https://fortunecookie.docs.apiary.io/#reference/cookie/list-all-fortunes?console=1
-    //For background music: https://www.tutorialspoint.com/how-to-play-background-music-in-android-app
-    //
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        taphere = findViewById(R.id.tapHerePleaseWork);
-        // we need a quote box and also a credits box
         instructions = findViewById(R.id.instruction);
         animalPicture = findViewById(R.id.pictureAnimal);
         quote = findViewById(R.id.FortuneText);
-        quote.setVisibility(View.VISIBLE);
-        animalPicture.setVisibility(View.VISIBLE);
+        quote.setText("");
+        Button taphere = findViewById(R.id.tapHerePleaseWork);
+        taphere.setOnClickListener(unused -> {
+            runApi();
+        });
     }
-
-    public void runApi() {
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        String dogUrl = "https://api.thedogapi.com/v1/images/search";
-        String apiKey = "06bd0cd7-415f-45f3-848c-0919a7b195af";
+    void runApi() {
+        RequestQueue queue = Volley.newRequestQueue(this);
+        //String dogUrl = "https://api.thedogapi.com/v1/images/search";
+        String url = "https://dog.ceo/api/breeds/image/random";
+        //String apiKey = "06bd0cd7-415f-45f3-848c-0919a7b195af";
         try {
-            new Header("x-api-key", apiKey);
-            JsonObjectRequest dogRequestAPI = new JsonObjectRequest(Request.Method.GET, dogUrl, null,
+            //new Header("x-api-key", apiKey);
+            JsonObjectRequest dogRequestAPI = new JsonObjectRequest(Request.Method.GET, url, null,
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
+                            Log.d("program", "working");
                             try {
-                                String doggie = response.get("id").toString();
-                                System.out.println(doggie);
+                                String newUrl = response.get("message").toString();
+                                Picasso.get().load(newUrl).resize(600,500).centerCrop().into(animalPicture);
                                 Log.d("program", "working");
-                                // get photo with some program
-
-
                             } catch (JSONException e) {
                                 Log.e("program", "json exception");
-                                System.out.println("oops we got an exception");
                             }
-
                         }
                     }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError volleyerror) {
-                    Log.d("program", "volley error occured");
+                    Log.d("program", "volley error occured" + volleyerror.toString());
                     return;
                 }
             });
-            //requestQueue.add(dogRequestAPI);
+            queue.add(dogRequestAPI);
         } catch (Exception e) {
             System.out.println("Header/API key error? IDK");
         }
-        try {
+        /**try {
             // Here goes fortune code
             // http://yerkee.com/api
             String fortuneUrl = "http://yerkee.com/api/fortune/";
@@ -87,6 +75,8 @@ public class MainActivity extends AppCompatActivity {
                                 String message = fortune.getString("fortune");
                                 System.out.println(message);
                                 messageToShow = message;
+                                quote.setText(message);
+                                System.out.println(message);
                                 Log.d("program", "working");
                                 // where am i supposed to display the message of the fortune??
 
@@ -116,11 +106,6 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             System.out.print("Whoa, this is a big error");
         }
-    }
-    public void showEverything(android.view.View view) {
-        runApi();
-        TextView textViewFortune = findViewById(R.id.FortuneText);
-        textViewFortune.setText(messageToShow);
-        textViewFortune.setVisibility(View.VISIBLE);
+         **/
     }
 }

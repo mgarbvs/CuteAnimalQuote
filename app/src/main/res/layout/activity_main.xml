@@ -31,7 +31,6 @@
         android:layout_marginEnd="157dp"
         android:layout_marginRight="157dp"
         android:layout_marginBottom="105dp"
-        android:onClick="showEverything"
         android:text="Tap!"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -48,7 +47,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_launcher_foreground" />
+        app:srcCompat="@drawable/ic_launcher_foreground"
+        android:contentDescription="TODO" />
 
     <TextView
         android:id="@+id/FortuneText"
