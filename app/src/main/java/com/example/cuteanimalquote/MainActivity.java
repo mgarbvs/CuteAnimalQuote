@@ -7,7 +7,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.android.volley.*; //lets just get everything
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.*; // for later;
@@ -40,6 +39,20 @@ public class MainActivity extends AppCompatActivity {
     public void runApi() {
         RequestQueue request = Volley.newRequestQueue(this);
         String dogUrl = "https://api.thedogapi.com/v1/images/search";
+        String apiKey = "06bd0cd7-415f-45f3-848c-0919a7b195af";
+        try {
+            new Header("x-api-key",apiKey);
+            JsonObjectRequest dogRequestAPI = new JsonObjectRequest(Request.Method.GET, dogUrl, null,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+
+                        }
+                    }
+
+            );
+
+        }
         String fortuneUrl = "https://fortunecookie.docs.apiary.io/#reference/cookie/list-all-fortunes?console=1";
         //http://fortunecookieapi.herokuapp.com/#fortunes-fortune-get for the fortune
         //Perhaps we can store an array of past fortunes and skip ones we have gotten before? Maybe too ambitions
