@@ -6,6 +6,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.android.volley.*; //lets just get everything
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.*; // for later;
