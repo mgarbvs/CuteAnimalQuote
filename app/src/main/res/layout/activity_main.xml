@@ -50,18 +50,20 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_launcher_foreground" />
 
-    <EditText
+    <TextView
         android:id="@+id/FortuneText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="false"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Fortune shown here!"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="211dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="41dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginRight="100dp"
+        android:layout_marginBottom="14dp"
+        android:text="Fortune Goes Here!"
+        app:layout_constraintBottom_toTopOf="@+id/instruction"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/pictureAnimal"
-        app:layout_constraintVertical_bias="0.618" />
+        app:layout_constraintTop_toBottomOf="@+id/pictureAnimal" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

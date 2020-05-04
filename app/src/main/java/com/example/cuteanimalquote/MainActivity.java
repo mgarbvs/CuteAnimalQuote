@@ -76,14 +76,14 @@ public class MainActivity extends AppCompatActivity {
         }
         // Here goes fortune code
         // http://yerkee.com/api
-        String fortuneUrl = "http://fortunecookieapi.com/v1/cookie?fortuneId=&lottoId=&lessonId=&limit=";
+        String fortuneUrl = "http://yerkee.com/api/fortune/";
         JsonObjectRequest fortuneRequest = new JsonObjectRequest(Request.Method.GET, fortuneUrl, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
                             JSONObject fortune = response.getJSONObject("fortune");
-                            String message = fortune.getString("message");
+                            String message = fortune.getString("fortune");
                             System.out.println(message);
                             messageToShow = message;
                             Log.d("program", "working");
