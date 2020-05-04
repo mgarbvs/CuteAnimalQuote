@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         String dogUrl = "https://api.thedogapi.com/v1/images/search";
         String apiKey = "06bd0cd7-415f-45f3-848c-0919a7b195af";
         try {
-            new Header("x-api-key",apiKey);
+            new Header("x-api-key", apiKey);
             JsonObjectRequest dogRequestAPI = new JsonObjectRequest(Request.Method.GET, dogUrl, null,
                     new Response.Listener<JSONObject>() {
                         @Override
@@ -70,48 +70,52 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
             });
-            requestQueue.add(dogRequestAPI);
+            //requestQueue.add(dogRequestAPI);
         } catch (Exception e) {
             System.out.println("Header/API key error? IDK");
         }
-        // Here goes fortune code
-        // http://yerkee.com/api
-        String fortuneUrl = "http://yerkee.com/api/fortune/";
-        JsonObjectRequest fortuneRequest = new JsonObjectRequest(Request.Method.GET, fortuneUrl, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            JSONObject fortune = response.getJSONObject("fortune");
-                            String message = fortune.getString("fortune");
-                            System.out.println(message);
-                            messageToShow = message;
-                            Log.d("program", "working");
-                            // where am i supposed to display the message of the fortune??
+        try {
+            // Here goes fortune code
+            // http://yerkee.com/api
+            String fortuneUrl = "http://yerkee.com/api/fortune/";
+            JsonObjectRequest fortuneRequest = new JsonObjectRequest(Request.Method.GET, fortuneUrl, null,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+                                JSONObject fortune = response.getJSONObject("fortune");
+                                String message = fortune.getString("fortune");
+                                System.out.println(message);
+                                messageToShow = message;
+                                Log.d("program", "working");
+                                // where am i supposed to display the message of the fortune??
 
 
-                        } catch (JSONException e) {
-                            Log.e("program", "json exception");
-                            System.out.println("oops we got an exception");
+                            } catch (JSONException e) {
+                                Log.e("program", "json exception");
+                                System.out.println("oops we got an exception");
+                            }
+
                         }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError volleyerror) {
+                    Log.d("program", "volley error occured");
+                    return;
+                }
+            });
+            requestQueue.add(fortuneRequest);
 
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError volleyerror) {
-                Log.d("program", "volley error occured");
-                return;
-            }
-        });
-        requestQueue.add(fortuneRequest);
+            //I don't know what this thing does^
+            //Do you know how to display the message after you get the request from the API?
 
-        //I don't know what this thing does^
-        //Do you know how to display the message after you get the request from the API?
-
-        //http://fortunecookieapi.herokuapp.com/#fortunes-fortune-get for the fortune
-        //Perhaps we can store an array of past fortunes and skip ones we have gotten before? Maybe too ambitions
-        //for dogs: https://api.thedogapi.com/v1/images/search seems to already do the trick, we just need to visit it each time we want a new dog.
-        //background music:
+            //http://fortunecookieapi.herokuapp.com/#fortunes-fortune-get for the fortune
+            //Perhaps we can store an array of past fortunes and skip ones we have gotten before? Maybe too ambitions
+            //for dogs: https://api.thedogapi.com/v1/images/search seems to already do the trick, we just need to visit it each time we want a new dog.
+            //background music:
+        } catch (Exception e) {
+            System.out.print("Whoa, this is a big error");
+        }
     }
     public void showEverything(android.view.View view) {
         runApi();
