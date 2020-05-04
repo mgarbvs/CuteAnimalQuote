@@ -70,8 +70,37 @@ public class MainActivity extends AppCompatActivity {
             System.out.println("Header/API key error? IDK");
         }
         // Here goes fortune code
+        String fortuneUrl = "http://fortunecookieapi.com/v1/cookie?fortuneId=&lottoId=&lessonId=&limit=";
+        JsonObjectRequest fortuneRequest = new JsonObjectRequest(Request.Method.GET, fortuneUrl, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONObject fortune = response.getJSONObject("fortune");
+                            String message = fortune.getString("message");
+                            System.out.println(message);
+                            Log.d("program", "working");
+                            // where am i supposed to display the message of the fortune??
 
-        String fortuneUrl = "https://fortunecookie.docs.apiary.io/#reference/cookie/list-all-fortunes?console=1";
+
+                        } catch (JSONException e) {
+                            Log.e("program", "json exception");
+                            System.out.println("oops we got an exception");
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyerror) {
+                Log.d("program", "volley error occured");
+                return;
+            }
+        });
+        requestQueue.add(fortuneRequest);
+
+        //I don't know what this thing does^
+        //Do you know how to display the message after you get the request from the API?
+
         //http://fortunecookieapi.herokuapp.com/#fortunes-fortune-get for the fortune
         //Perhaps we can store an array of past fortunes and skip ones we have gotten before? Maybe too ambitions
         //for dogs: https://api.thedogapi.com/v1/images/search seems to already do the trick, we just need to visit it each time we want a new dog.
