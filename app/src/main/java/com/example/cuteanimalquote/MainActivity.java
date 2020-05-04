@@ -3,6 +3,7 @@ import android.content.Context;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,6 +18,8 @@ public class MainActivity extends AppCompatActivity {
     TextView quote;
     TextView instructions;
     Button taphere;
+    private String messageToShow;
+
 
     //quotes: https://fortunecookie.docs.apiary.io/#reference/cookie/list-all-fortunes?console=1
     //For background music: https://www.tutorialspoint.com/how-to-play-background-music-in-android-app
@@ -32,7 +35,9 @@ public class MainActivity extends AppCompatActivity {
         // we need a quote box and also a credits box
         instructions = findViewById(R.id.instruction);
         animalPicture = findViewById(R.id.pictureAnimal);
-
+        quote = findViewById(R.id.FortuneText);
+        quote.setVisibility(View.VISIBLE);
+        animalPicture.setVisibility(View.VISIBLE);
     }
 
     public void runApi() {
@@ -79,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
                             JSONObject fortune = response.getJSONObject("fortune");
                             String message = fortune.getString("message");
                             System.out.println(message);
+                            messageToShow = message;
                             Log.d("program", "working");
                             // where am i supposed to display the message of the fortune??
 
@@ -105,5 +111,11 @@ public class MainActivity extends AppCompatActivity {
         //Perhaps we can store an array of past fortunes and skip ones we have gotten before? Maybe too ambitions
         //for dogs: https://api.thedogapi.com/v1/images/search seems to already do the trick, we just need to visit it each time we want a new dog.
         //background music:
+    }
+    public void showEverything(android.view.View view) {
+        runApi();
+        TextView textViewFortune = findViewById(R.id.FortuneText);
+        textViewFortune.setText(messageToShow);
+        textViewFortune.setVisibility(View.VISIBLE);
     }
 }
